@@ -3,7 +3,7 @@
     "tagline": "Codeship API",
     "description": "Codeship is a hosted Continuous Delivery platform. It helps to release software quickly, automatically and multiple times a day. It shortens the development cycles thus reducing the risk of bugs and increasing innovation. It helps software companies to develop a better product faster by taking care of the testing and release process. Managing your own continuous deployment system takes time, specialized knowledge, custom solutions and dedicated, on-premise infrastructure.",
     "image": "https:\/\/logo.clearbit.com\/Codeship.com",
-    "repo": "",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-Codeship-Package",
     "keywords": [
         "API",
         "Development",

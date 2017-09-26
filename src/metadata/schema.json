@@ -1,0 +1,208 @@
+{
+    "package": "Codeship",
+    "tagline": "Codeship API",
+    "description": "Codeship is a hosted Continuous Delivery platform. It helps to release software quickly, automatically and multiple times a day. It shortens the development cycles thus reducing the risk of bugs and increasing innovation. It helps software companies to develop a better product faster by taking care of the testing and release process. Managing your own continuous deployment system takes time, specialized knowledge, custom solutions and dedicated, on-premise infrastructure.",
+    "image": "https:\/\/logo.clearbit.com\/Codeship.com",
+    "repo": "",
+    "keywords": [
+        "API",
+        "Development",
+        "Code",
+        "Platform",
+        "Host"
+    ],
+    "accounts": {
+        "domain": "codeship.com",
+        "credentials": [
+            "apiKey"
+        ]
+    },
+    "steps": [
+        "Register on the codeship.com",
+        "After registration, you will receive apiKey in account setting https:\/\/app.codeship.com\/user\/edit"
+    ],
+    "blocks": [
+        {
+            "name": "getProjects",
+            "description": "This wil return a list of all projects incl. the last 10 builds for each project.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https://codeship.com\/api\/v1\/projects.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getProject",
+            "description": "This will return information about the specified project as well as the latest builds for that project.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "projectId",
+                    "type": "Number",
+                    "info": "Project id.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "project_id"
+                    }
+                },
+                {
+                    "name": "branch",
+                    "type": "String",
+                    "info": "Project branch.",
+                    "required": false
+                }
+            ],
+            "vendorRequest": {
+                "url": "https://codeship.com\/api\/v1\/projects\/{$data['project_id']}.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key",
+                            "branch"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "getBuild",
+            "description": "This will return the details of the build specified by the buildUuid.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "buildUuid",
+                    "type": "Number",
+                    "info": "Unique build id.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "build_uuid"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https://codeship.com\/api\/v1\/builds\/{$data['build_uuid']}.json",
+                "method": "get",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        },
+        {
+            "name": "restartBuild",
+            "description": "This will make Codeship restart the build identified by the buildUuid. It will use the commit id from that particular build, so you will always get the same source as when the build was first triggered.",
+            "args": [
+                {
+                    "name": "apiKey",
+                    "type": "credentials",
+                    "info": "Your API Key.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "api_key"
+                    }
+                },
+                {
+                    "name": "buildUuid",
+                    "type": "Number",
+                    "info": "Unique build id.",
+                    "required": true,
+                    "vendorSchema": {
+                        "name": "build_uuid"
+                    }
+                }
+            ],
+            "vendorRequest": {
+                "url": "https://codeship.com\/api\/v1\/builds\/{$data['build_uuid']}\/restart.json",
+                "method": "post",
+                "requestParameters": [
+                    {
+                        "type": "query",
+                        "parameters": [
+                            "api_key"
+                        ]
+                    }
+                ]
+            },
+            "callbacks": [
+                {
+                    "name": "error",
+                    "info": "Error"
+                },
+                {
+                    "name": "success",
+                    "info": "Success"
+                }
+            ]
+        }
+    ]
+}
